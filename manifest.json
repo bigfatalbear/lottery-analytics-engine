@@ -1,0 +1,61 @@
+{
+  "name": "LOTTERY ANALYTICS ENGINE",
+  "short_name": "Lottery Analytics",
+  "description": "Analise estatistica, geracao, backtest e simulacao Monte Carlo de jogos de loteria. Offline-first, sem conta e sem coleta de dados.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#070d18",
+  "theme_color": "#0b1220",
+  "categories": ["utilities", "productivity", "education"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Gerador",
+      "short_name": "Gerador",
+      "url": "./index.html#/generator",
+      "description": "Gerar e ranquear combinacoes"
+    },
+    {
+      "name": "Analise",
+      "short_name": "Analise",
+      "url": "./index.html#/analysis",
+      "description": "Raio-X estatistico do historico"
+    },
+    {
+      "name": "Meus jogos",
+      "short_name": "Jogos",
+      "url": "./index.html#/games",
+      "description": "Jogos salvos e conferencia"
+    }
+  ]
+}

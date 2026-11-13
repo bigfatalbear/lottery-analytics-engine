@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# LOTTERY ANALYTICS ENGINE — aplicacao estatica client-side.
+# Nenhuma pagina privada: todo o processamento ocorre no dispositivo do usuario.

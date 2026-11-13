@@ -1,0 +1,18 @@
+{
+  "name": "lottery-analytics-engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PWA analitico offline-first para analise estatistica de loterias (Lotofacil e Mega-Sena).",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node tests/run.js",
+    "data:update": "node scripts/update-dataset.mjs",
+    "data:validate": "node scripts/validate-dataset.mjs",
+    "icons": "node scripts/generate-icons.mjs",
+    "serve": "node scripts/serve.mjs"
+  }
+}

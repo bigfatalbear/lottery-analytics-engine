@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/lottery-analytics-engine/data/schema.json",
+  "title": "LOTTERY ANALYTICS ENGINE — dataset de concursos",
+  "description": "Esquema do arquivo de dados historicos consumido pelo PWA. Cada modalidade possui um arquivo em data/<game>.json.",
+  "type": "object",
+  "required": ["game", "version", "datasetStatus", "source", "lastUpdated", "lastContest", "draws"],
+  "additionalProperties": true,
+  "properties": {
+    "game": {
+      "type": "string",
+      "enum": ["lotofacil", "megasena"],
+      "description": "Identificador da modalidade, igual ao GAME_PROFILE.id."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Versao do formato do arquivo."
+    },
+    "datasetStatus": {
+      "type": "string",
+      "enum": ["complete", "partial", "empty"],
+      "description": "complete = comeca no concurso 1 sem lacunas; partial = historico incompleto; empty = sem concursos."
+    },
+    "source": {
+      "type": "string",
+      "description": "Origem declarada dos dados (official, fallback, local)."
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Momento da ultima atualizacao bem-sucedida do arquivo."
+    },
+    "lastContest": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Maior numero de concurso presente no arquivo."
+    },
+    "drawCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 dos concursos em forma canonica (contest, date, numbers, prizes)."
+    },
+    "draws": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["contest", "date", "numbers"],
+        "additionalProperties": true,
+        "properties": {
+          "contest": { "type": "integer", "minimum": 1 },
+          "date": { "type": "string", "format": "date" },
+          "numbers": {
+            "type": "array",
+            "minItems": 6,
+            "maxItems": 20,
+            "items": { "type": "integer", "minimum": 1, "maximum": 60 },
+            "description": "Dezenas unicas, ordenadas de forma crescente."
+          },
+          "prizes": {
+            "type": ["object", "null"],
+            "description": "Mapa hits -> valor por ganhador. Ausente ou null quando o valor nao e conhecido.",
+            "additionalProperties": { "type": ["number", "null"], "minimum": 0 }
+          },
+          "source": { "type": "string" }
+        }
+      }
+    }
+  }
+}

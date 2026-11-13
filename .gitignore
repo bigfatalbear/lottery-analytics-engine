@@ -1,0 +1,19 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+
+# Sistema operacional / editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Artefatos locais de dados e relatorios
+tmp/
+*.log
+data/report.json
+
+# Caches de ferramentas
+.cache/
+coverage/

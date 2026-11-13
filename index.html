@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>LOTTERY ANALYTICS ENGINE</title>
+    <meta
+      name="description"
+      content="Analise estatistica, geracao e simulacao de jogos de loteria com dados historicos oficiais. PWA offline-first: Lotofacil e Mega-Sena."
+    />
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f5f7fb" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="robots" content="index, follow" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Lottery Analytics" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- CSP compativel com GitHub Pages: sem eval, sem inline JavaScript -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
+
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./icons/icon-192.png" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <link rel="stylesheet" href="./src/css/components.css" />
+    <link rel="stylesheet" href="./src/css/responsive.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Pular para o conteudo principal</a>
+
+    <div class="app-shell">
+      <header class="topbar" role="banner">
+        <button
+          id="menu-toggle"
+          class="icon-btn menu-toggle"
+          type="button"
+          aria-label="Abrir menu de navegacao"
+          aria-expanded="false"
+          aria-controls="sidebar"
+        >
+          <span class="icon-bars" aria-hidden="true"></span>
+        </button>
+
+        <a class="brand" href="#/dashboard" aria-label="LOTTERY ANALYTICS ENGINE, ir para o dashboard">
+          <svg class="brand-mark" viewBox="0 0 40 40" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="brandGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#38bdf8" />
+                <stop offset="100%" stop-color="#6366f1" />
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#brandGradient)" opacity="0.16" />
+            <rect x="8" y="20" width="5" height="12" rx="2" fill="url(#brandGradient)" />
+            <rect x="17.5" y="12" width="5" height="20" rx="2" fill="url(#brandGradient)" />
+            <rect x="27" y="16" width="5" height="16" rx="2" fill="url(#brandGradient)" opacity="0.75" />
+            <circle cx="10.5" cy="14" r="2.6" fill="#38bdf8" />
+          </svg>
+          <span class="brand-text">
+            <strong>Lottery Analytics</strong>
+            <small>Engine</small>
+          </span>
+        </a>
+
+        <div class="game-switch" role="group" aria-label="Modalidade">
+          <button type="button" class="chip" data-action="select-game" data-game="lotofacil" aria-pressed="true">
+            Lotofacil
+          </button>
+          <button type="button" class="chip" data-action="select-game" data-game="megasena" aria-pressed="false">
+            Mega-Sena
+          </button>
+        </div>
+
+        <div class="topbar-actions">
+          <span id="data-status" class="status-pill status-idle" role="status" aria-live="polite">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="data-status-text">Carregando</span>
+          </span>
+          <span id="last-contest" class="topbar-meta">--</span>
+          <button id="btn-refresh" type="button" class="icon-btn" aria-label="Atualizar dados" title="Atualizar dados">
+            <span class="icon-refresh" aria-hidden="true"></span>
+          </button>
+          <button id="btn-theme" type="button" class="icon-btn" aria-label="Alternar tema" title="Alternar tema">
+            <span class="icon-theme" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <aside id="sidebar" class="sidebar" aria-label="Navegacao principal">
+        <nav id="nav" class="nav"></nav>
+        <div class="sidebar-foot">
+          <div class="foot-row">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="foot-version">v1.0.0</span>
+          </div>
+          <div class="foot-row subtle">
+            <span id="foot-storage">Armazenamento</span>
+          </div>
+          <div class="foot-row subtle">
+            <span id="foot-mode">Modo compacto: off</span>
+          </div>
+        </div>
+      </aside>
+
+      <main id="main" class="main" tabindex="-1">
+        <div id="view" class="view" aria-live="polite"></div>
+      </main>
+
+      <footer class="footer" role="contentinfo">
+        <p>
+          Este aplicativo realiza analises estatisticas e simulacoes com base em dados historicos. Loterias sao
+          eventos aleatorios. Nenhuma analise, estrategia ou combinacao garante premiacao.
+        </p>
+        <p class="footer-meta">
+          <span id="foot-algorithm">Algoritmo v1.0.0</span>
+          <span aria-hidden="true">·</span>
+          <span id="foot-dataset">Dataset --</span>
+        </p>
+      </footer>
+    </div>
+
+    <div id="modal-root"></div>
+
+    <noscript>
+      <div class="noscript">
+        Este aplicativo requer JavaScript habilitado para executar as analises estatisticas localmente.
+      </div>
+    </noscript>
+
+    <script type="module" src="./src/js/app.js"></script>
+  </body>
+</html>
