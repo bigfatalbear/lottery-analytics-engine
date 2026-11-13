@@ -4,6 +4,10 @@ PWA analítica, **offline-first** e 100% client-side para estudar o comportament
 loterias — Lotofácil e Mega-Sena — com estatística descritiva, escore de aderência, geração
 filtrada, backtesting e simulação Monte Carlo.
 
+**Publicado em:** https://bigfatalbear.github.io/lottery-analytics-engine/
+
+![Dashboard](docs/screenshot.png)
+
 > **Sem previsão. Sem promessa de prêmio.**
 > O sistema descreve o passado: frequência, atraso, ciclo, repetição, estrutura, distribuição.
 > Nenhum número, escore ou combinação aumenta a probabilidade real de um sorteio futuro.
@@ -489,6 +493,18 @@ integridade   todos os módulos carregam + datasets válidos (>100 concursos, co
 - publica `data/report.json` como artefato;
 - **commit apenas se `data/*.json` mudou** (nunca duplica concurso, nunca apaga histórico);
 - `permissions: contents: write` e `concurrency` para evitar execuções concorrentes.
+
+> **Pendência desta publicação inicial:** o token OAuth usado no primeiro `push` não possui o
+> escopo `workflow`, então o arquivo ficou em [`docs/update-results.workflow.yml`](docs/update-results.workflow.yml)
+> (cópia idêntica, com nota no topo). Para ativar o pipeline:
+>
+> ```bash
+> gh auth refresh -s workflow
+> git mv docs/update-results.workflow.yml .github/workflows/update-results.yml
+> git commit -m "ci: ativa atualizacao automatica de resultados" && git push
+> ```
+>
+> Remova também a linha de `.git/info/exclude` que ignora o arquivo localmente.
 
 ---
 
