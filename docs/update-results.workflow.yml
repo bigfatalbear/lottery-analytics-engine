@@ -1,3 +1,8 @@
+# NOTA: copia de referencia do workflow.
+# O push inicial nao pode incluir .github/workflows/update-results.yml porque o token OAuth
+# usado nao possui o escopo 'workflow'. Apos executar 'gh auth refresh -s workflow', mova este
+# arquivo para .github/workflows/update-results.yml e faca o push.
+
 name: Update lottery datasets
 
 on:
